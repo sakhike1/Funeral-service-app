@@ -1,47 +1,47 @@
-
-import { motion } from 'framer-motion';
+import {Link} from 'react-router-dom';
 import { 
-  Heart, 
+  Car, 
+  Clock, 
+  Shield, 
   Phone, 
-  Calendar, 
-  ClipboardList, 
-  Users, 
-  Handshake,
-  Brain,
+  Building2, 
+  Users,
+  HeartHandshake,
   Sparkles
 } from 'lucide-react';
+import { motion } from 'framer-motion';
 
-const GriefSupportSection = () => {
-  const steps = [
+const TransportServiceSection = () => {
+  const services = [
+    {
+      icon: Clock,
+      title: "24/7 Available Service",
+      description: "Round-the-clock availability ensuring immediate response and assistance whenever you need our services."
+    },
+    {
+      icon: Car,
+      title: "Professional Transportation",
+      description: "Specialized vehicles equipped with all necessary features to ensure dignified and respectful transportation."
+    },
+    {
+      icon: Shield,
+      title: "Licensed & Insured",
+      description: "Fully licensed, bonded, and insured services with trained professionals following strict protocols."
+    },
+    {
+      icon: Building2,
+      title: "Institution Partners",
+      description: "Trusted partner for hospitals, healthcare facilities, and funeral homes, providing reliable transfer services."
+    },
     {
       icon: Phone,
-      title: "24/7 AI-Powered Support",
-      description: "Our advanced AI system works alongside our compassionate team to provide immediate assistance and guidance whenever you need it."
-    },
-    {
-      icon: Calendar,
-      title: "Smart Consultation Planning",
-      description: "Our intelligent scheduling system helps find the perfect time for a consultation, adapting to your needs and preferences."
-    },
-    {
-      icon: ClipboardList,
-      title: "Automated Document Processing",
-      description: "Advanced AI assists in streamlining paperwork, ensuring accurate and efficient handling of all necessary documentation."
+      title: "Easy Booking",
+      description: "Simple and efficient booking process through our advanced application, available on mobile and web platforms."
     },
     {
       icon: Users,
-      title: "Personalized Family Care",
-      description: "AI-driven analysis helps match you with the most suitable support groups and counselors for your specific situation."
-    },
-    {
-      icon: Heart,
-      title: "Intelligent Memorial Design",
-      description: "Our AI helps create personalized tributes by analyzing memories and preferences to honor your loved one uniquely."
-    },
-    {
-      icon: Handshake,
-      title: "Continuous AI Support",
-      description: "Our AI system evolves with your needs, providing relevant resources and support throughout your journey."
+      title: "Family Support",
+      description: "Compassionate support team available to assist families and answer questions throughout the process."
     }
   ];
 
@@ -68,29 +68,7 @@ const GriefSupportSection = () => {
   };
 
   return (
-    <div className="font-sans bg-gray-900 min-h-screen relative overflow-hidden px-6 py-16">
-      {/* Animated background elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        {[...Array(20)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-1 h-1 bg-blue-500/20"
-            initial={{ opacity: 0.2, scale: 0 }}
-            animate={{
-              opacity: [0.2, 0.5, 0.2],
-              scale: [0, 1, 0],
-              x: [Math.random() * window.innerWidth, Math.random() * window.innerWidth],
-              y: [Math.random() * window.innerHeight, Math.random() * window.innerHeight],
-            }}
-            transition={{
-              duration: Math.random() * 5 + 5,
-              repeat: Infinity,
-              ease: "linear"
-            }}
-          />
-        ))}
-      </div>
-
+    <div className="font-sans bg-slate-900 min-h-screen relative overflow-hidden px-6 py-16">
       <div className="max-w-6xl mx-auto relative z-10">
         <motion.div 
           className="text-center mb-16"
@@ -99,19 +77,18 @@ const GriefSupportSection = () => {
           transition={{ duration: 0.8 }}
         >
           <div className="flex items-center justify-center gap-3 mb-6">
-            <Brain className="w-8 h-8 text-blue-400" />
-            <Sparkles className="w-8 h-8 text-purple-400" />
+            <HeartHandshake className="w-8 h-8 text-blue-800" />
+            <Sparkles className="w-8 h-8 text-pink-600" />
           </div>
-          <h2 className="text-white text-4xl md:text-5xl font-light mb-6 leading-tight">
-          
-           
-            <span className="font-semibold bg-gradient-to-r from-blue-400 to-purple-400 text-transparent bg-clip-text">
-              Life's Most Difficult Moments
+          <h2 className="text-slate-100 text-4xl md:text-5xl font-light mb-6 leading-tight">
+            Professional & Dignified
+            <span className="font-semibold block text-blue-700">
+              Transportation Services
             </span>
           </h2>
-          <p className="text-gray-300 max-w-2xl mx-auto text-lg leading-relaxed">
-            Our AI-powered platform works alongside our compassionate team to provide
-            personalized guidance and support through each step of your journey.
+          <p className="text-slate-500 max-w-2xl mx-auto text-lg leading-relaxed">
+            Providing respectful and reliable transportation services with the support
+            of advanced technology to ensure dignity and peace of mind.
           </p>
         </motion.div>
 
@@ -121,25 +98,24 @@ const GriefSupportSection = () => {
           initial="hidden"
           animate="visible"
         >
-          {steps.map((step, index) => (
+          {services.map((service, index) => (
             <motion.div
               key={index}
               variants={cardVariants}
               whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}
               className="relative group"
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-lg transform group-hover:scale-105 transition-transform duration-300" />
-              <div className="flex flex-col items-start gap-4 bg-black/50 p-6 rounded-lg backdrop-blur-lg border border-white/10 group-hover:border-white/20 transition-all relative z-10">
+              <div className="bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 p-6">
                 <motion.div 
-                  className="p-3 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-full"
+                  className="p-3 bg-slate-100 rounded-full inline-block mb-4"
                   whileHover={{ rotate: 360 }}
                   transition={{ duration: 0.5 }}
                 >
-                  <step.icon className="w-6 h-6 text-white" />
+                  <service.icon className="w-6 h-6 text-slate-700" />
                 </motion.div>
                 <div>
-                  <h4 className="text-white text-lg font-semibold mb-2">{step.title}</h4>
-                  <p className="text-gray-300 text-sm leading-relaxed">{step.description}</p>
+                  <h4 className="text-slate-900 text-lg font-semibold mb-2">{service.title}</h4>
+                  <p className="text-slate-600 text-sm leading-relaxed">{service.description}</p>
                 </div>
               </div>
             </motion.div>
@@ -152,16 +128,18 @@ const GriefSupportSection = () => {
           animate={{ opacity: 1 }}
           transition={{ delay: 1 }}
         >
+          <Link to="/contact">
           <button 
             type="button"
-            className="bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white font-medium text-lg rounded-full px-8 py-4 shadow-lg hover:shadow-xl transition-all transform hover:scale-105"
+            className="bg-slate-700 hover:bg-slate-600 text-white font-medium text-lg rounded-full px-8 py-4 shadow-md hover:shadow-lg transition-all transform hover:scale-105"
           >
-            Connect with AI Support
+            Request Transportation Service
           </button>
+          </Link>
         </motion.div>
       </div>
     </div>
   );
 };
 
-export default GriefSupportSection;
+export default TransportServiceSection;

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Heart, Flower2, Calendar, Phone } from 'lucide-react';
+import { Truck, Heart, Calendar, Phone } from 'lucide-react';
 import Image from '../assets/images/girl-hugging-her-mother-outdoors.jpg';
 
 // Define an interface for ServiceCard props
@@ -64,14 +64,14 @@ const HeroSection: React.FC = () => {
 
   const services = [
     {
-      Icon: Heart,
-      title: 'Compassionate Care',
-      description: "Providing gentle guidance and understanding through life's most challenging moments.",
+      Icon: Truck,
+      title: 'Dignified Transportation',
+      description: "Providing gentle and respectful transportation of the deceased to the nearest or preferred mortuary.",
     },
     {
-      Icon: Flower2,
-      title: 'Memorial Services',
-      description: "Creating dignified ceremonies that honor and celebrate your loved one's legacy.",
+      Icon: Heart,
+      title: 'Compassionate Care',
+      description: "Offering gentle guidance and understanding through life's most challenging moments.",
     },
     {
       Icon: Calendar,
@@ -114,11 +114,10 @@ const HeroSection: React.FC = () => {
       <div className="grid lg:grid-cols-2 items-center min-h-[85vh]">
         <motion.div initial="hidden" animate="visible" variants={fadeInUpVariants} className="max-lg:order-1 px-8 lg:px-16 py-20 lg:py-28">
           <h1 className="text-stone-800 lg:text-5xl text-3xl font-light leading-tight">
-            Walking Beside You Through Life's Most Difficult Journey
+            Ensuring Dignified and Reliable Transportation Services
           </h1>
           <p className="text-stone-600 mt-8 text-lg leading-relaxed">
-            During times of loss, we offer our heartfelt support and guidance. Allow us to help you create a meaningful tribute that honors your loved
-            one's memory with dignity and grace.
+            At Gold Tears Send Off, we offer dignified and reliable transportation services for deceased individuals. Our mission is to ensure a seamless and respectful transfer of the deceased from the place of death to the nearest or preferred mortuary or morgue.
           </p>
 
           <motion.div className="mt-12 flex gap-6" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.6, duration: 1 }}>

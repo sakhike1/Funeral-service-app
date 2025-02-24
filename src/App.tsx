@@ -3,9 +3,10 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/NavBar';
 import Home from './pages/Home';
 import Service from './pages/Service';
-import Obituaries from './pages/Obituaries';
+import About from './pages/About';
 import PlanAhead from './pages/PlanAhead';
 import Contact from './pages/Contact';
+import RequestTransport from './pages/RequestTransport';
 import Footer from './components/FooterSection';
 
 const App = () => {
@@ -18,9 +19,10 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/service" element={<Service />} />
-            <Route path="/obituaries" element={<Obituaries />} />
+            <Route path="/About" element={<About />} />
             <Route path="/plan-ahead" element={<PlanAhead />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/RequestTransport" element={<RequestTransport />} />
             <Route
               path="*"
               element={

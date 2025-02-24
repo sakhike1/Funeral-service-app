@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Send, Mail, Phone, MapPin } from 'lucide-react';
+import Image from '../assets/images/istockphoto-1347838937-612x612.jpg'
 import emailjs from '@emailjs/browser';
 
 function App() {
@@ -41,7 +42,7 @@ function App() {
             className="space-y-8"
           >
             <img
-              src="https://images.unsplash.com/photo-1423666639041-f56000c27a9a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1474&q=80"
+              src={Image}
               alt="Contact"
               className="rounded-2xl shadow-2xl"
             />
@@ -52,7 +53,7 @@ function App() {
                 className="flex items-center space-x-4 bg-gray-800/50 p-4 rounded-lg"
               >
                 <Mail className="text-blue-400" />
-                <span>contact@example.com</span>
+                <span>Tiyani.Mbalati@gmail.com</span>
               </motion.div>
               
               <motion.div
@@ -60,7 +61,7 @@ function App() {
                 className="flex items-center space-x-4 bg-gray-800/50 p-4 rounded-lg"
               >
                 <Phone className="text-green-400" />
-                <span>+1 (555) 123-4567</span>
+                <span>083 123 4567</span>
               </motion.div>
               
               <motion.div
@@ -68,7 +69,7 @@ function App() {
                 className="flex items-center space-x-4 bg-gray-800/50 p-4 rounded-lg"
               >
                 <MapPin className="text-red-400" />
-                <span>123 Business Street, Suite 100, City, State 12345</span>
+                <span>No 1 North Road, Johannesburg</span>
               </motion.div>
             </div>
           </motion.div>
@@ -138,7 +139,7 @@ function App() {
                   whileTap={{ scale: 0.95 }}
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full py-3 px-6 rounded-lg bg-blue-600 hover:bg-blue-700 transition flex items-center justify-center space-x-2 disabled:opacity-50"
+                  className="w-full py-3 px-6 rounded-lg bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-indigo-700 via-gray-400 to-emerald-50 hover:bg-blue-700 transition flex items-center justify-center space-x-2 disabled:opacity-50"
                 >
                   {isSubmitting ? (
                     <span>Sending...</span>

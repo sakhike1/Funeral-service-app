@@ -1,19 +1,24 @@
-
+import React from 'react';
 import {
-  Church,
+  Truck,
   Clock,
   HeartHandshake,
-  
-  Flower2,
-  Car,
-  Users,
+  Shield,
+  MapPin,
+  Phone,
   Sparkles,
   LucideIcon
 } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
-const ServiceCard = ({ icon: Icon, title, description, details  }: { icon: LucideIcon, title: string, description: string, details: string[], index: number }) => {
+import { motion } from 'framer-motion';
 
+type ServiceCardProps = {
+  icon: LucideIcon;
+  title: string;
+  description: string;
+  details: string[];
+};
 
+const ServiceCard = ({ icon: Icon, title, description, details }: ServiceCardProps) => {
   const iconVariants = {
     initial: { scale: 1 },
     hover: { 
@@ -25,21 +30,20 @@ const ServiceCard = ({ icon: Icon, title, description, details  }: { icon: Lucid
 
   return (
     <motion.div 
-      
       initial="hidden"
       animate="visible"
       whileHover={{ y: -10 }}
       className="relative group"
     >
-      <div className="absolute inset-0 bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl transform rotate-1 group-hover:rotate-2 transition-transform duration-300"></div>
+      <div className="absolute inset-0 bg-gradient-to-r from-blue-50 to-gray-50 rounded-xl transform rotate-1 group-hover:rotate-2 transition-transform duration-300"></div>
       <div className="relative bg-white p-8 rounded-xl shadow-lg backdrop-blur-sm border border-gray-100">
         <motion.div 
-          className="p-4 bg-gradient-to-r from-blue-50 to-purple-50 rounded-full w-16 h-16 flex items-center justify-center mb-6"
+          className="p-4 bg-gradient-to-r from-blue-50 to-gray-50 rounded-full w-16 h-16 flex items-center justify-center mb-6"
           variants={iconVariants}
           initial="initial"
           whileHover="hover"
         >
-          <Icon className="w-8 h-8 text-indigo-600" />
+          <Icon className="w-8 h-8 text-blue-600" />
         </motion.div>
         
         <h4 className="text-xl font-semibold text-gray-800 mb-3">{title}</h4>
@@ -54,7 +58,7 @@ const ServiceCard = ({ icon: Icon, title, description, details  }: { icon: Lucid
               transition={{ delay: 0.1 * idx }}
               className="flex items-center space-x-3 text-gray-600"
             >
-              <Sparkles className="w-4 h-4 text-indigo-400" />
+              <Sparkles className="w-4 h-4 text-blue-400" />
               <span>{detail}</span>
             </motion.li>
           ))}
@@ -64,84 +68,84 @@ const ServiceCard = ({ icon: Icon, title, description, details  }: { icon: Lucid
   );
 };
 
-const FuneralServicesSection = () => {
+const TransportServices = React.forwardRef<HTMLDivElement>((_props, ref) => {
   const services = [
     {
-      icon: Church,
-      title: "Traditional Funeral Service",
-      description: "A dignified ceremony honoring your loved one's life with traditional customs and rituals.",
+      icon: Truck,
+      title: "Professional Transport",
+      description: "Dignified transportation services with real-time GPS tracking and status updates.",
       details: [
-        "Viewing and visitation options",
-        "Religious or non-religious ceremony",
-        "Musical tribute arrangements",
-        "Traditional casket options",
-        "Memorial keepsakes"
-      ]
-    },
-    {
-      icon: Flower2,
-      title: "Memorial Services",
-      description: "A personalized celebration of life that reflects your loved one's unique journey.",
-      details: [
-        "Customized memorial displays",
-        "Video tribute creation",
-        "Memory sharing ceremony",
-        "Guest book and prayer cards",
-        "Photography services"
+        "24/7 transportation availability",
+        "GPS-enabled fleet tracking",
+        "Climate-controlled vehicles",
+        "Professional handling protocols",
+        "Direct facility-to-facility transfer"
       ]
     },
     {
       icon: Clock,
-      title: "Immediate Services",
-      description: "Compassionate assistance for those requiring prompt arrangements.",
+      title: "Expedited Services",
+      description: "Priority transport services for time-sensitive situations.",
       details: [
-        "24/7 professional care",
-        "Transportation services",
-        "Document preparation",
-        "Cremation options",
-        "Express arrangements"
+        "Rapid response team",
+        "Express documentation processing",
+        "Priority route planning",
+        "Real-time status updates",
+        "Dedicated transport coordinator"
       ]
     },
     {
       icon: HeartHandshake,
-      title: "Pre-Planning Services",
-      description: "Thoughtful preparation to ensure your wishes are honored and loved ones are unburdened.",
+      title: "Healthcare Coordination",
+      description: "Seamless coordination with healthcare facilities and funeral homes.",
       details: [
-        "Personal consultation",
-        "Documentation of wishes",
-        "Payment planning options",
-        "Family notification plan",
-        "Regular plan updates"
+        "Direct facility communication",
+        "Documentation management",
+        "Transfer authorization handling",
+        "Inter-facility coordination",
+        "Digital paperwork processing"
       ]
     },
     {
-      icon: Car,
-      title: "Professional Services",
-      description: "Comprehensive support services ensuring a dignified farewell.",
+      icon: Shield,
+      title: "Secure Transport",
+      description: "Enhanced security measures ensuring safe and respectful transportation.",
       details: [
-        "Funeral procession",
-        "Cemetery coordination",
-        "Flower arrangements",
-        "Monument selection",
-        "Insurance processing"
+        "Secure vehicle systems",
+        "Trained security personnel",
+        "Chain of custody tracking",
+        "Digital security protocols",
+        "Verification procedures"
       ]
     },
     {
-      icon: Users,
-      title: "Family Care Services",
-      description: "Supporting families before, during, and after the service.",
+      icon: MapPin,
+      title: "Geographic Coverage",
+      description: "Extensive service coverage across multiple regions and facilities.",
       details: [
-        "Grief counseling referrals",
-        "Estate planning guidance",
-        "Benefits assistance",
-        "Support group access",
-        "Anniversary remembrance"
+        "Nationwide transport services",
+        "Rural area accessibility",
+        "Interstate coordination",
+        "Route optimization",
+        "Multiple facility networks"
+      ]
+    },
+    {
+      icon: Phone,
+      title: "Support Services",
+      description: "Comprehensive support throughout the transportation process.",
+      details: [
+        "24/7 customer support",
+        "Real-time status updates",
+        "Digital documentation access",
+        "Facility coordination assistance",
+        "Emergency response team"
       ]
     }
   ];
 
   return (
-    <div className="min-h-screen bg-white font-sans">
+    <div ref={ref} className="min-h-screen bg-white font-sans">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <motion.div 
           className="text-center mb-20"
@@ -153,9 +157,9 @@ const FuneralServicesSection = () => {
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             transition={{ duration: 0.5 }}
-            className="inline-block p-3 bg-gradient-to-r from-blue-50 to-purple-50 rounded-full mb-8"
+            className="inline-block p-3 bg-gradient-to-r from-blue-50 to-gray-50 rounded-full mb-8"
           >
-            <HeartHandshake className="w-10 h-10 text-indigo-600" />
+            <Truck className="w-10 h-10 text-blue-600" />
           </motion.div>
           
           <motion.h1 
@@ -164,9 +168,9 @@ const FuneralServicesSection = () => {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3 }}
           >
-            Compassionate Care for
-            <span className="block font-semibold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
-              Life's Final Journey
+            Professional Transport
+            <span className="block font-semibold bg-gradient-to-r from-blue-600 to-gray-600 bg-clip-text text-transparent">
+              With Digital Precision
             </span>
           </motion.h1>
           
@@ -176,8 +180,7 @@ const FuneralServicesSection = () => {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5 }}
           >
-            We provide dignified and professional funeral services, ensuring every detail 
-            is handled with the utmost care and respect for your loved ones.
+            Golden Tears Send Off (GTS) envisions an Africa where every deceased individual is transported with the utmost dignity and care, leveraging advanced technology to provide seamless, compassionate, and reliable services.
           </motion.p>
         </motion.div>
 
@@ -187,11 +190,9 @@ const FuneralServicesSection = () => {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.7 }}
         >
-          <AnimatePresence>
-            {services.map((service, index) => (
-              <ServiceCard key={index} {...service} index={index} />
-            ))}
-          </AnimatePresence>
+          {services.map((service, index) => (
+            <ServiceCard key={index} {...service} />
+          ))}
         </motion.div>
 
         <motion.div 
@@ -200,13 +201,13 @@ const FuneralServicesSection = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.2 }}
         >
-          <button className="px-8 py-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-full font-medium shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300">
-            Schedule a Consultation
+          <button className="px-8 py-4 bg-gradient-to-r from-blue-600 to-gray-600 text-white rounded-full font-medium shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300">
+            Request Transport Service
           </button>
         </motion.div>
       </div>
     </div>
   );
-};
+});
 
-export default FuneralServicesSection;
+export default TransportServices;

@@ -1,181 +1,122 @@
-
-import { Heart, Clock, Flower2, Users, Camera, Church, Moon, HeartHandshake } from 'lucide-react';
-import { motion } from 'framer-motion';
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { Truck, Clock, MessageSquare, FileText, HeartHandshake, Hospital, Shield, Phone } from 'lucide-react';
 
 const ServicePage = () => {
   const services = [
     {
-      title: "Traditional Funeral Services",
-      icon: <Church className="w-10 h-10" />,
-      description: "Comprehensive traditional funeral services honoring your loved one's legacy with dignity and respect.",
-      features: ["Chapel Service", "Visitation", "Graveside Ceremony", "Memorial Books", "Online Obituary"],
-      gradient: "from-blue-50 via-gray-50 to-purple-50"
+      title: "Deceased Transportation Services",
+      icon: <Truck />,
+      description: "Partnering with over 1000 funeral providers and healthcare facilities to simplify deceased transport across South Africa.",
+      gradient: "from-violet-50 to-indigo-50"
     },
     {
-      title: "Celebration of Life",
-      icon: <Heart className="w-10 h-10" />,
-      description: "A personalized celebration focusing on your loved one's life, achievements, and cherished memories.",
-      features: ["Custom Theme", "Photo Displays", "Video Tributes", "Memory Sharing", "Personal Touches"],
-      gradient: "from-rose-50 via-gray-50 to-purple-50"
+      title: "Real-Time Order Tracking",
+      icon: <Shield />,
+      description: "Multiple digital platforms enabling families to track their loved one's transportation in real-time with status updates.",
+      gradient: "from-rose-50 to-orange-50"
     },
     {
-      title: "Memorial Services",
-      icon: <Flower2 className="w-10 h-10" />,
-      description: "Thoughtfully planned memorial services that bring comfort and healing to family and friends.",
-      features: ["Flexible Timing", "Various Venues", "Memorial Displays", "Guest Books", "Live Streaming"],
-      gradient: "from-purple-50 via-gray-50 to-blue-50"
+      title: "Direct Messaging with Drivers",
+      icon: <MessageSquare />,
+      description: "Seamless communication platform allowing families to coordinate directly with drivers throughout the journey.",
+      gradient: "from-emerald-50 to-teal-50"
     },
     {
-      title: "Pre-Planning Services",
-      icon: <Clock className="w-10 h-10" />,
-      description: "Compassionate guidance in planning ahead to ensure your wishes are honored and loved ones are cared for.",
-      features: ["Personal Consultation", "Documentation", "Payment Plans", "Family Support", "24/7 Assistance"],
-      gradient: "from-gray-50 via-blue-50 to-purple-50"
+      title: "24/7 Support",
+      icon: <Clock />,
+      description: "Round-the-clock caring assistance available whenever you need us most.",
+      gradient: "from-blue-50 to-cyan-50"
     }
   ];
 
   const additionalServices = [
     {
-      icon: <Camera className="w-6 h-6" />,
-      title: "Professional Photography",
-      description: "Capture meaningful moments with dignity"
+      icon: <FileText />,
+      title: "Documentation Assistance",
+      description: "Help with insurance claims and burial documentation"
     },
     {
-      icon: <Users className="w-6 h-6" />,
-      title: "Grief Counseling",
-      description: "Professional support for families"
+      icon: <Hospital />,
+      title: "Healthcare Partnerships",
+      description: "Strong network of healthcare facility partners"
     },
     {
-      icon: <Moon className="w-6 h-6" />,
-      title: "After-Care Program",
-      description: "Ongoing support and resources"
+      icon: <HeartHandshake />,
+      title: "Dignified Care",
+      description: "Compassionate and meticulous handling"
     },
     {
-      icon: <HeartHandshake className="w-6 h-6" />,
-      title: "Cultural Services",
-      description: "Honoring diverse traditions"
+      icon: <Phone />,
+      title: "Immediate Response",
+      description: "Swift assistance during difficult times"
     }
   ];
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2
-      }
-    }
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.5
-      }
-    }
-  };
-
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 via-white to-gray-100">
-      {/* Hero Section */}
-      <div className="bg-gradient-to-l from-orange-300 via-stone-100 to-gray-300 text-black py-24">
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="container mx-auto px-4"
-        >
-          <h1 className="text-5xl md:text-6xl font-serif mb-8 text-center leading-tight">
-            Honoring Life's Journey
+      <div className="bg-gradient-to-r from-violet-100 via-slate-50 to-indigo-100 py-20">
+        <div className="container mx-auto px-4 text-center">
+          <h1 className="text-4xl md:text-5xl font-serif mb-6 text-gray-800">
+            Golden Tears Send Off (GTS)
           </h1>
-          <p className="text-xl md:text-2xl text-center text-gray-500 max-w-4xl mx-auto leading-relaxed">
-            Providing compassionate and personalized funeral services to honor your loved ones with dignity and respect.
+          <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+            Partnering with select funeral providers to deliver dignified and dependable funeral transportation services. We ensure seamless and respectful transfer of the deceased from the place of death to the chosen mortuary.
           </p>
-        </motion.div>
+        </div>
       </div>
 
-      {/* Main Services Section */}
-      <div className="container mx-auto px-4 py-24">
-        <motion.div 
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-          className="grid grid-cols-1 lg:grid-cols-2 gap-12"
-        >
+      <div className="container mx-auto px-4 py-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {services.map((service, index) => (
-            <motion.div
+            <div
               key={index}
-              variants={itemVariants}
-              whileHover={{ scale: 1.02 }}
-              className={`bg-gradient-to-br ${service.gradient} rounded-xl shadow-lg p-10 border border-gray-100`}
+              className={`bg-gradient-to-br ${service.gradient} rounded-xl p-6 text-center transform transition-all duration-300 hover:scale-105 hover:shadow-lg`}
             >
-              <div className="flex items-start gap-6 mb-8">
-                <div className="p-4 rounded-full bg-white shadow-md text-gray-800">
-                  {service.icon}
-                </div>
-                <div>
-                  <h3 className="text-2xl font-serif text-gray-800 mb-2">{service.title}</h3>
-                  <p className="text-gray-600 leading-relaxed">{service.description}</p>
+              <div className="flex justify-center mb-4">
+                <div className="p-3 bg-white rounded-full shadow-sm">
+                  {React.cloneElement(service.icon, { className: "w-6 h-6 text-gray-700" })}
                 </div>
               </div>
-              <ul className="space-y-4">
-                {service.features.map((feature, idx) => (
-                  <li key={idx} className="flex items-center text-gray-700">
-                    <div className="w-2 h-2 bg-gray-400 rounded-full mr-4"></div>
-                    <span className="text-lg">{feature}</span>
-                  </li>
-                ))}
-              </ul>
-              <button className="mt-8 w-full bg-gray-800 text-white py-4 rounded-full hover:bg-gray-700 transition-all duration-300 text-lg font-medium shadow-md hover:shadow-xl">
-                Learn More
-              </button>
-            </motion.div>
+              <h3 className="text-lg font-medium text-gray-800 mb-2">{service.title}</h3>
+              <p className="text-sm text-gray-600 leading-relaxed">{service.description}</p>
+            </div>
           ))}
-        </motion.div>
+        </div>
 
-        {/* Additional Services */}
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4 }}
-          className="mt-24"
-        >
-          <h2 className="text-4xl font-serif text-center mb-16">Additional Services</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="mt-16">
+          <h2 className="text-3xl font-serif text-center mb-10 text-gray-800">Additional Services</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {additionalServices.map((service, index) => (
-              <motion.div 
+              <div
                 key={index}
-                whileHover={{ scale: 1.05 }}
-                className="bg-gradient-to-r from-gray-700 via-gray-900 to-black p-8 rounded-xl shadow-lg text-center "
+                className="bg-gradient-to-r from-violet-100 via-slate-50 to-indigo-100 rounded-xl p-6 shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
               >
-                <div className="inline-block p-4 rounded-full bg-[conic-gradient(at_top,_var(--tw-gradient-stops))] from-yellow-200 via-purple-50 to-fuchsia-600 text-gray-800 mb-6">
-                  {service.icon}
+                <div className="flex flex-col items-center">
+                  <div className="mb-4">
+                    {React.cloneElement(service.icon, { 
+                      className: "w-5 h-5 text-gray-700" 
+                    })}
+                  </div>
+                  <h3 className="text-base font-medium text-gray-800 mb-2">{service.title}</h3>
+                  <p className="text-sm text-gray-600 text-center">{service.description}</p>
                 </div>
-                <h3 className="text-xl text-gray-400 font-serif mb-3">{service.title}</h3>
-                <p className="text-gray-100">{service.description}</p>
-              </motion.div>
+              </div>
             ))}
           </div>
-        </motion.div>
+        </div>
 
-        {/* Contact Section */}
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.6 }}
-          className="mt-24 bg-gradient-to-l from-yellow-100 via-violet-700 to-sky-700 rounded-xl p-12 text-center text-white"
-        >
-          <h2 className="text-3xl font-serif mb-6">Need Assistance?</h2>
-          <p className="text-m text-gray-300 mb-8 max-w-2xl mx-auto">
-            Our compassionate team is available 24/7 to help you with any questions or concerns.
+        <div className="mt-16 bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-blue-200 via-slate-800 to-red-900 rounded-xl p-8 text-center">
+          <h2 className="text-2xl font-serif text-white mb-4">Need Immediate Assistance?</h2>
+          <p className="text-gray-100 mb-6 max-w-2xl mx-auto">
+            GTS is here for you 24/7, providing caring assistance when you need it most.
           </p>
-          <button className="bg-white text-gray-900 px-12 py-4 rounded-full text-lg font-medium hover:bg-gray-100 transition-colors duration-300 shadow-lg">
-            Contact Us
-          </button>
-        </motion.div>
+          <Link to="/contact">
+            <button className="bg-white text-gray-800 px-8 py-3 rounded-full text-sm font-medium hover:bg-gray-50 transition-colors duration-300 shadow-md">
+              Contact Us Now
+            </button>
+          </Link>
+        </div>
       </div>
     </div>
   );

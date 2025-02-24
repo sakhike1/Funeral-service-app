@@ -8,6 +8,8 @@ import HeroFive from '../components/HeroFive';
 import HeroSix from '../components/HeroSix';
 import HeroSeven from '../components/HeroSeven';
 import ScrollButton from "../components/ScrollButton";
+import FuneralServiceLocator from "../components/FuneralServiceLocator";
+import Partnership from "../components/Partnership";
 
 
 
@@ -29,11 +31,18 @@ const Home = () => {
       
             </section>
 
+            <section  >
+            <FuneralServiceLocator/>
+      
+      
+            </section>
+
             <section >
             <HeroThree />
       
       
             </section>
+            
 
             <section >
             <HeroFour/>
@@ -60,7 +69,13 @@ const Home = () => {
             </section>
         
         
-        
+           
+
+            <section  >
+            <Partnership/>
+      
+      
+            </section>
        
             
            <div>

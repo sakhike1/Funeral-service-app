@@ -1,87 +1,99 @@
-
+import { useState } from 'react';
 import { motion } from 'framer-motion';
-import Image from '../assets/images/istockphoto-1347838937-612x612.jpg';
-import { Link} from 'react-router-dom';
+import { Sparkles } from 'lucide-react';
 
-const HeroFour = () => {
-  const fadeIn = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 1, ease: "easeOut" }
-    }
-  };
+interface Service {
+  title: string;
+  description: string;
+  price: string;
+  period: string;
+  index: number;
+}
 
-  const imageFloat = {
-    hidden: { opacity: 0, scale: 0.95 },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      transition: {
-        duration: 1.5,
-        ease: "easeOut"
-      }
-    }
-  };
+const ServiceOfferings = () => {
+  const [hoveredCard, setHoveredCard] = useState<number | null>(null);
+
+  const deliveryServices: Omit<Service, 'index'>[] = [
+    {
+      title: "Standard Delivery",
+      description: "Reliable and cost-effective service for transporting deceased individuals. Designed for funeral parlours seeking an economical option. Operates within a set timeframe, providing flexibility and convenience for less time-sensitive transfers. Includes tracking options.",
+      price: "R1,500",
+      period: "per Transfer",
+    },
+    {
+      title: "Express Delivery",
+      description: "Faster transportation service for urgent or time-sensitive transfers. Prioritizes deliveries to ensure quicker turnaround times. Ideal for funeral homes and hospitals needing quick solutions.",
+      price: "R2,500",
+      period: "per transfer",
+    },
+    {
+      title: "Same-Day Delivery",
+      description: "Designed for critical needs requiring transport within hours of placing the order. Valuable for immediate transfers. Utilizes an efficient and responsive fleet for real-time dispatch and delivery.",
+      price: "R3,500",
+      period: "per transfer",
+    },
+  ];
+
+  const ServiceCard = ({ title, description, price, period, index }: Service) => (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
+      whileHover={{ scale: 1.02 }}
+      className="bg-gradient-to-br from-blue-50 to-white rounded-lg shadow-lg p-6 flex flex-col md:flex-row justify-between items-start relative overflow-hidden"
+      onHoverStart={() => setHoveredCard(index)}
+      onHoverEnd={() => setHoveredCard(null)}
+    >
+      <div className="flex-1 pr-4 relative z-10 mb-4 md:mb-0">
+        <div className="flex items-center gap-2 mb-2">
+          <h3 className="text-lg font-semibold">{title}</h3>
+          {hoveredCard === index && (
+            <motion.div
+              initial={{ opacity: 0, scale: 0 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.3 }}
+            >
+              <Sparkles className="text-blue-500" size={20} />
+            </motion.div>
+          )}
+        </div>
+        <p className="text-gray-600 text-sm">{description}</p>
+      </div>
+      <div className="text-left md:text-right min-w-[120px] relative z-10">
+        <span className="text-xl font-bold text-blue-600">{price}</span>
+        <span className="block text-sm text-gray-600">{period}</span>
+      </div>
+      {hoveredCard === index && (
+        <motion.div
+          className="absolute inset-0 bg-blue-100 opacity-10"
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+          transition={{ duration: 0.3 }}
+        />
+      )}
+    </motion.div>
+  );
 
   return (
-    <section className="px-6 py-16 bg-white overflow-hidden">
-      <div className="max-w-7xl mx-auto">
-        <div className="grid md:grid-cols-2 items-center gap-12">
-          {/* Image - Now first on big screens */}
-          <motion.div
-            initial="hidden"
-            animate="visible"
-            variants={imageFloat}
-            className="relative order-1"
-          >
-            <img
-              src={Image}
-              alt="Memorial Garden"
-              className="rounded-lg shadow-2xl w-full object-cover h-[500px] transition-transform duration-300 hover:scale-105"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-gray-900/50 to-transparent rounded-lg" />
-          </motion.div>
+    <div className="max-w-7xl mt-20 mx-auto p-4 sm:p-8 mb-24 bg-gray-50 rounded-2xl">
+      <motion.div 
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="flex flex-col sm:flex-row items-center justify-between mb-8 gap-4"
+      >
+        <h1 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-4 sm:mb-0">Our Services</h1>
+      </motion.div>
 
-          {/* Text Content - Now second on big screens */}
-          <motion.div
-            initial="hidden"
-            animate="visible"
-            variants={fadeIn}
-            className="space-y-6 order-2"
-          >
-            <motion.h1
-              className="text-black lg:text-4xl md:text-3xl text-2xl font-serif mb-4 leading-relaxed"
-            >
-              Honoring Lives with Dignity & Grace
-            </motion.h1>
-
-            <motion.p
-              className="text-gray-600 mt-6 text-lg leading-relaxed font-light"
-            >
-              During life's most challenging moments, we're here to provide compassionate support and guidance. Our dedicated team helps you create meaningful tributes that celebrate and honor your loved ones' cherished memories.
-            </motion.p>
-
-            <motion.div
-              className="mt-12 space-x-4"
-              variants={fadeIn}
-            >
-              <Link to="/plan-ahead">
-              <button
-                type='button'
-                className="bg-purple-600 hover:bg-purple-700 text-white transition-all duration-300 font-medium text-base rounded-full px-6 py-3"
-              >
-                Plan a Service
-              </button>
-              </Link>
-             
-            </motion.div>
-          </motion.div>
-        </div>
-      </div>
-    </section>
+      <motion.div 
+        className="grid grid-cols-1 gap-6"
+        layout
+      >
+        {deliveryServices.map((service, index) => (
+          <ServiceCard key={index} {...service} index={index} />
+        ))}
+      </motion.div>
+    </div>
   );
 };
 
-export default HeroFour;
+export default ServiceOfferings;

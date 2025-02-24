@@ -1,137 +1,142 @@
+import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { Car, Heart, Shield } from 'lucide-react';
 
-import { motion } from 'framer-motion';
-import { Flower, Heart, Feather } from 'lucide-react';
-import Image from '../assets/images/istockphoto-1481648899-612x612.jpg';
+const GoldenTearsSendOff = () => {
+  const [isVisible, setIsVisible] = useState(false);
+  const [bgColor, setBgColor] = useState('bg-slate-800/80');
+  const [testimonialBg, setTestimonialBg] = useState('bg-slate-800/80');
+  
+  useEffect(() => {
+    setIsVisible(true);
 
-function App() {
-  const fadeIn = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.8, ease: "easeOut" }
-    }
-  };
+    const colors = ['bg-red-500/80', 'bg-blue-500/80', 'bg-green-500/80', 'bg-yellow-500/80'];
+    let colorIndex = 0;
 
-  const floatAnimation = {
-    hidden: { y: 0 },
-    visible: {
-      y: [-10, 0, -10],
-      transition: {
-        duration: 4,
-        repeat: Infinity,
-        ease: "easeInOut"
-      }
-    }
-  };
+    const colorInterval = setInterval(() => {
+      colorIndex = (colorIndex + 1) % colors.length;
+      setBgColor(colors[colorIndex]);
+    }, 1000);
 
-  const glowAnimation = {
-    hidden: { opacity: 0.5 },
-    visible: {
-      opacity: [0.5, 1, 0.5],
-      transition: {
-        duration: 2,
-        repeat: Infinity,
-        ease: "easeInOut"
-      }
-    }
-  };
+    const testimonialColors = [
+      'bg-purple-800/80',
+      'bg-indigo-800/80',
+      'bg-blue-800/80',
+      'bg-cyan-800/80',
+      'bg-teal-800/80'
+    ];
+    let testimonialColorIndex = 0;
+
+    const testimonialInterval = setInterval(() => {
+      testimonialColorIndex = (testimonialColorIndex + 1) % testimonialColors.length;
+      setTestimonialBg(testimonialColors[testimonialColorIndex]);
+    }, 2000);
+
+    return () => {
+      clearInterval(colorInterval);
+      clearInterval(testimonialInterval);
+    };
+  }, []);
 
   return (
-    <div className="min-h-screen bg-black text-white">
-      {/* Animated background gradient */}
-      <div className="absolute inset-0 " />
-      
-      {/* Main content */}
+    <div className="min-h-screen bg-slate-900 text-white relative overflow-hidden">
       <div className="relative z-10">
-        <div className="max-w-7xl mx-auto px-4 py-20 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <div className="max-w-7xl mx-auto px-4 py-12 sm:py-20 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start">
             {/* Left column - Text content */}
-            <motion.div
-              initial="hidden"
-              animate="visible"
-              variants={fadeIn}
-              className="space-y-8"
-            >
-              <motion.div 
-                variants={glowAnimation} 
-                animate="visible"
-                className="flex items-center gap-3 text-purple-400"
-              >
-                <Feather className="w-6 h-6" />
-                <span className="text-sm uppercase tracking-wider">Compassionate Care</span>
-              </motion.div>
+            <div className={`space-y-6 sm:space-y-8 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+              <div className="flex items-center gap-3 text-gold-400">
+                <Shield className="w-5 h-5 sm:w-6 sm:h-6" />
+                <span className="text-xs sm:text-sm uppercase tracking-wider">Trusted Transportation Services</span>
+              </div>
 
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif leading-tight">
-                Celebrating Lives
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif leading-tight">
+                Gold Tears Send Off
                 <br />
-                <span className="text-purple-400">With Dignity & Grace</span>
+                <span className="text-amber-400">Dignified Care When Needed</span>
               </h1>
 
-              <p className="text-gray-300 text-lg leading-relaxed">
-                In times of loss, we stand beside you with unwavering support and understanding. 
-                Our dedicated team helps create meaningful ceremonies that honor and celebrate 
-                the precious memories of your loved ones.
+              <p className="text-gray-300 text-base sm:text-lg leading-relaxed">
+                Through our network of trusted funeral parlours, we provide dignified and reliable 
+                transportation services nationwide. Our advanced digital platform ensures seamless, 
+                respectful, and prompt transfer of your loved ones to their chosen destination.
               </p>
 
-              <motion.div 
-                className="flex flex-wrap gap-4 mt-8"
-                variants={fadeIn}
-              >
-                <button className="bg-purple-600 hover:bg-purple-700 px-8 py-3 rounded-full text-white font-medium transition-all duration-300 flex items-center gap-2">
-                  <Heart className="w-5 h-5" />
-                  Plan a Service
-                </button>
-                <button className="border border-purple-400 hover:bg-purple-400/10 px-8 py-3 rounded-full text-purple-400 font-medium transition-all duration-300">
-                  Contact Us
-                </button>
-              </motion.div>
-            </motion.div>
+              <div className="flex flex-col sm:flex-row gap-4 mt-6 sm:mt-8">
+                <Link to="/contact" className="w-full sm:w-auto">
+                  <button className="w-full sm:w-auto bg-amber-600 hover:bg-amber-700 px-6 sm:px-8 py-3 rounded-full text-white font-medium transition-all duration-300 flex items-center justify-center gap-2">
+                    <Car className="w-5 h-5" />
+                    Request Service
+                  </button>
+                </Link>
 
-            {/* Right column - Image and floating elements */}
-            <motion.div
-              initial="hidden"
-              animate="visible"
-              variants={fadeIn}
-              className="relative"
-            >
-              <motion.div
-                variants={floatAnimation}
-                animate="visible"
-                className="relative rounded-2xl overflow-hidden shadow-2xl"
-              >
-                <img
-                  src={Image}
-                  alt="Memorial Garden"
-                  className="w-full h-[600px] object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-              </motion.div>
+                <Link to="/service" className="w-full sm:w-auto">
+                  <button className="w-full sm:w-auto border border-amber-400 hover:bg-amber-400/10 px-6 sm:px-8 py-3 rounded-full text-amber-400 font-medium transition-all duration-300">
+                    Our Network
+                  </button>
+                </Link>
+              </div>
+            </div>
 
-              {/* Floating decorative elements */}
-              <motion.div
-                variants={floatAnimation}
-                animate="visible"
-                className="absolute -top-10 -right-10 text-purple-400"
+            {/* Right column - Features and trust indicators */}
+            <div className={`relative transition-all duration-700 delay-300 mt-8 lg:mt-0 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+              <div className={`rounded-2xl overflow-hidden ${bgColor} p-6 sm:p-8 shadow-2xl relative z-10`}>
+                <div className="space-y-6">
+                  {[
+                    {
+                      icon: Heart,
+                      title: "Compassionate Care",
+                      description: "Professional and respectful transportation services available 24/7 nationwide."
+                    },
+                    {
+                      icon: Shield,
+                      title: "Trusted Network",
+                      description: "Partnership with reputable funeral parlours ensuring the highest standards of care."
+                    },
+                    {
+                      icon: Car,
+                      title: "Digital Platform",
+                      description: "Advanced geolocation technology for efficient and monitored transportation."
+                    }
+                  ].map((feature, index) => (
+                    <div 
+                      key={feature.title}
+                      className={`flex items-start gap-4 transition-all duration-500`}
+                      style={{ transitionDelay: `${index * 200}ms` }}
+                    >
+                      <div className="p-2 sm:p-3 bg-amber-400/10 rounded-lg shrink-0">
+                        <feature.icon className="w-5 h-5 sm:w-6 sm:h-6 text-amber-400" />
+                      </div>
+                      <div>
+                        <h3 className="text-lg sm:text-xl font-medium mb-2">{feature.title}</h3>
+                        <p className="text-gray-300 text-sm sm:text-base">{feature.description}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Responsive testimonial */}
+              <div 
+                className={`relative lg:absolute mt-6 lg:mt-5 p-4 sm:p-6 backdrop-blur-lg 
+                  rounded-2xl shadow-xl transition-all duration-1000 transform ${testimonialBg} ${
+                  isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+                } hover:scale-105 mx-auto lg:mx-4`}
+                style={{
+                  maxWidth: '100%',
+                  zIndex: 20
+                }}
               >
-                <Flower className="w-20 h-20 opacity-50" />
-              </motion.div>
-              
-              <motion.div
-                variants={glowAnimation}
-                animate="visible"
-                className="absolute -bottom-5 -left-5 p-6 bg-purple-900/30 backdrop-blur-lg rounded-2xl"
-              >
-                <p className="text-sm text-purple-200">
-                  "In the garden of memory, we meet to remember those we love."
+                <p className="text-sm sm:text-base text-amber-200 text-center lg:text-left">
+                  "Supporting families with dignity and compassion during their time of need."
                 </p>
-              </motion.div>
-            </motion.div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
   );
-}
+};
 
-export default App;
+export default GoldenTearsSendOff;

@@ -1,6 +1,6 @@
-
 import { motion } from 'framer-motion';
 import { Heart, Phone, Mail, MapPin } from 'lucide-react';
+import {Link} from 'react-router-dom'
 
 function App() {
   return (
@@ -27,14 +27,15 @@ function App() {
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.5, duration: 0.8 }}
           >
-            <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
-              Compassionate Care in Your Time of Need
+            <h1 className="text-3xl md:text-5xl font-bold text-white mb-6">
+              Seamless and Compassionate Deceased Transportation
             </h1>
-            <p className="text-xl text-gray-200 max-w-2xl mx-auto mb-8">
-              We're here to help you honor and celebrate the life of your loved one with dignity and respect.
+            <p className="text-[13px] text-gray-200 max-w-2xl mx-auto mb-8">
+              At Gold Tears Send Off, we ensure dignity, care, and reliability during your time of need.
             </p>
             
             {/* Glowing Button */}
+            <Link to="/contact">
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -45,48 +46,67 @@ function App() {
             >
               Contact Us Now
             </motion.button>
+            </Link>
           </motion.div>
         </div>
       </motion.div>
+
+      {/* Introduction Section */}
+      <div
+       
+        
+        className="w-full mx-auto bg-gray-700 px-4 py-16"
+      >
+        <h2 className="text-3xl font-bold text-center mb-12 text-gray-100">
+          About Gold Tears Send Off
+        </h2>
+        <p className="text-[13px] text-gray-50 text-center max-w-4xl mx-auto mb-8">
+          Gold Tears Send Off (GTSO) specializes in providing dignified and reliable transportation services for deceased individuals. We partner with a trusted network of funeral parlours to ensure the seamless and respectful transfer of the deceased from the place of death to the nearest or preferred mortuary or morgue. Utilizing an advanced digital commerce platform, we deliver prompt, compassionate, and safe body transportation services nationwide. With a vision for future international expansion, we aim to support families, hospitals, and institutions with exceptional care.
+        </p>
+      </div>
 
       {/* Services Section */}
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1, duration: 0.8 }}
+        transition={{ delay: 1.2, duration: 0.8 }}
         className="max-w-7xl mx-auto px-4 py-16"
       >
         <h2 className="text-3xl font-bold text-center mb-12 text-gray-800">
-          Our Compassionate Services
+          Our Services
         </h2>
-        
         <div className="grid md:grid-cols-3 gap-8">
           {[
             {
-              icon: <Heart className="w-8 h-8 text-purple-600" />,
-              title: "Memorial Services",
-              description: "Personalized ceremonies that celebrate and honor your loved one's unique life journey."
+              icon: <MapPin className="w-8 h-8 text-purple-600" />,
+              title: "Nationwide Body Transportation",
+              description:
+                "Seamlessly transporting deceased individuals to the nearest or preferred mortuary with dignity and respect."
             },
             {
-              icon: <MapPin className="w-8 h-8 text-purple-600" />,
-              title: "Funeral Planning",
-              description: "Comprehensive support in arranging all aspects of the funeral service."
+              icon: <Heart className="w-8 h-8 text-purple-600" />,
+              title: "Partner Network Services",
+              description:
+                "Collaborating with funeral parlours and hospitals to ensure a reliable and efficient process."
             },
             {
               icon: <Mail className="w-8 h-8 text-purple-600" />,
-              title: "Grief Support",
-              description: "Professional counseling and resources to help you through the healing process."
+              title: "Advanced Digital Platform",
+              description:
+                "Leveraging technology for real-time coordination and communication, ensuring convenience and peace of mind."
             }
           ].map((service, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.2 + index * 0.2 }}
+              transition={{ delay: 1.4 + index * 0.2 }}
               className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow"
             >
               <div className="mb-4">{service.icon}</div>
-              <h3 className="text-xl font-semibold mb-2 text-gray-800">{service.title}</h3>
+              <h3 className="text-xl font-semibold mb-2 text-gray-800">
+                {service.title}
+              </h3>
               <p className="text-gray-600">{service.description}</p>
             </motion.div>
           ))}
@@ -103,13 +123,12 @@ function App() {
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-gray-100 mb-4">
-              Available 24/7 for Your Needs
+              Here for You Anytime
             </h2>
             <p className="text-gray-200">
-              We understand that loss can occur at any time. Our compassionate team is here for you day and night.
+              Available 24/7, we ensure prompt assistance and compassionate care whenever you need us.
             </p>
           </div>
-
           <div className="flex justify-center space-x-8">
             <motion.a
               whileHover={{ scale: 1.05 }}
@@ -117,7 +136,7 @@ function App() {
               className="flex items-center text-purple-200"
             >
               <Phone className="w-6 h-6 mr-2" />
-              <span>1-234-567-890</span>
+              <span>083 123 4567</span>
             </motion.a>
           </div>
         </div>
