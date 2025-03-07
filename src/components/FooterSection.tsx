@@ -1,4 +1,4 @@
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const FooterSection = () => {
   return (
@@ -13,9 +13,9 @@ const FooterSection = () => {
               Celebrating Memories and Honouring your loved ones
             </p>
             <Link to="/contact">
-            <button className="py-2.5 px-5 h-9 block w-fit bg-indigo-600 rounded-full shadow-sm text-xs text-white mx-auto transition-all duration-500 hover:bg-indigo-700 lg:mx-0">
-              Contact us
-            </button>
+              <button className="py-2.5 px-5 h-9 block w-fit bg-indigo-600 rounded-full shadow-sm text-xs text-white mx-auto transition-all duration-500 hover:bg-indigo-700 lg:mx-0">
+                Contact us
+              </button>
             </Link>
           </div>
 
@@ -25,9 +25,18 @@ const FooterSection = () => {
               <ul className="text-sm transition-all duration-500">
                 {section.links.map((link) => (
                   <li key={link} className={`${link === section.links[section.links.length - 1] ? '' : 'mb-6'}`}>
-                    <button className="text-gray-600 hover:text-gray-900">
+                    <Link
+                      to={
+                        section.title === "Our Objectives"
+                          ? "/request-transport" // All links under "Our Objectives" go to /request-transport
+                          : section.title === "Products"
+                          ? "/contact" // All links under "Products" go to /contact
+                          : `/${link.toLowerCase().replace(/\s+/g, '-')}` // Default behavior for other sections
+                      }
+                      className="text-gray-600 hover:text-gray-900"
+                    >
                       {link}
-                    </button>
+                    </Link>
                   </li>
                 ))}
               </ul>
@@ -40,7 +49,6 @@ const FooterSection = () => {
             <span className="text-sm text-gray-500">
               ©<a href="https://pagedone.io">Gold Tears Send Off </a> 2024, All rights reserved.
             </span>
-            
           </div>
         </div>
       </div>
@@ -51,21 +59,16 @@ const FooterSection = () => {
 const footerSections = [
   {
     title: "Gold Tears Send Off",
-    links: ["Home  ", "services", "About", "Contact"]
+    links: ["Home", "Service", "About", "Contact"],
   },
-
-  
   {
     title: "Products",
-    links: ["Transportation", "Real-time tracking", "Digital solutions" ]
+    links: ["Transportation", "Real-time tracking", "Digital solutions"],
   },
   {
     title: "Our Objectives",
-    links: ["Nationwide Reach", "Technological Integration", "Client Satisfaction", "International Expansion"]
+    links: ["Nationwide Reach", "Technological Integration", "Client Satisfaction", "International Expansion"],
   },
-
 ];
-
-
 
 export default FooterSection;

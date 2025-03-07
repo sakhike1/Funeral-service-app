@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import {
   Truck,
   Clock,
@@ -69,6 +70,12 @@ const ServiceCard = ({ icon: Icon, title, description, details }: ServiceCardPro
 };
 
 const TransportServices = React.forwardRef<HTMLDivElement>((_props, ref) => {
+  const navigate = useNavigate(); // Initialize the navigate function
+
+  const handleClick = () => {
+    navigate("/contact"); // Navigate to the /contact route
+  };
+
   const services = [
     {
       icon: Truck,
@@ -201,7 +208,10 @@ const TransportServices = React.forwardRef<HTMLDivElement>((_props, ref) => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.2 }}
         >
-          <button className="px-8 py-4 bg-gradient-to-r from-blue-600 to-gray-600 text-white rounded-full font-medium shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300">
+          <button
+            onClick={handleClick} // Add the click handler
+            className="px-8 py-4 bg-gradient-to-r from-blue-600 to-gray-600 text-white rounded-full font-medium shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300"
+          >
             Request Transport Service
           </button>
         </motion.div>

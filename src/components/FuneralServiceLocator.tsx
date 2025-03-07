@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import  { useState, useEffect } from 'react';
 import { MapPin, Loader2, Globe, CheckCircle, AlertCircle } from 'lucide-react';
 import { motion } from 'framer-motion';
 import provincesData, { Town } from '../data/provincesData';
+import { collection, addDoc } from 'firebase/firestore';
+import { db } from '../firebase'; // Ensure Firebase is properly initialized
 
 interface Location {
   city: string;
@@ -66,9 +68,32 @@ export default function FuneralServiceLocator() {
     detectLocation();
   }, []);
 
-  const handleServiceRequest = () => {
-    if (!selectedService) return;
-    setRequestSent(true);
+  const handleServiceRequest = async () => {
+    if (!selectedService || !location) return;
+
+    try {
+      // Prepare the data to be submitted
+      const submissionData = {
+        service: selectedService,
+        city: location.city,
+        province: location.province,
+        timestamp: new Date(),
+      };
+
+      // Add the data to Firebase Firestore
+      await addDoc(collection(db, 'serviceRequests'), submissionData);
+
+      // Set request sent state
+      setRequestSent(true);
+
+      // Refresh the page after 2 seconds (optional delay)
+      setTimeout(() => {
+        window.location.reload();
+      }, 2000); // Adjust the delay as needed
+    } catch (error) {
+      console.error('Error submitting to Firebase:', error);
+      setError('Failed to submit your request. Please try again.');
+    }
   };
 
   return (

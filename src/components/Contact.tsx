@@ -1,32 +1,69 @@
 import { useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Send, Mail, Phone, MapPin } from 'lucide-react';
-import Image from '../assets/images/istockphoto-1347838937-612x612.jpg'
-import emailjs from '@emailjs/browser';
+import Image from '../assets/images/istockphoto-1347838937-612x612.jpg';
+import { collection, addDoc } from 'firebase/firestore';
+import { db } from '../firebase'; // Ensure Firebase is properly initialized
+import { useToast } from '../hooks/use-toast'; // Import the toast hook
 
 function App() {
   const formRef = useRef<HTMLFormElement>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const { toast } = useToast(); // Initialize the toast hook
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formRef.current) return;
 
     setIsSubmitting(true);
+
     try {
-      // Replace these with your EmailJS credentials
-      await emailjs.sendForm(
-        'YOUR_SERVICE_ID',
-        'YOUR_TEMPLATE_ID',
-        formRef.current,
-        'YOUR_PUBLIC_KEY'
-      );
+      // Get form data
+      const formData = new FormData(formRef.current);
+      const name = formData.get('user_name') as string;
+      const email = formData.get('user_email') as string;
+      const message = formData.get('message') as string;
+
+      // Validate form fields
+      if (!name || !email || !message) {
+        throw new Error('Please fill in all fields.');
+      }
+
+      // Prepare submission data
+      const submissionData = {
+        name,
+        email,
+        message,
+        timestamp: new Date(),
+      };
+
+      // Add data to Firebase collection
+      await addDoc(collection(db, 'contact-submissions'), submissionData);
+
+      // Show success toast
+      toast({
+        title: 'Success!',
+        description: 'Your message has been sent successfully.',
+      });
+
+      // Set submitted state
       setIsSubmitted(true);
+
+      // Reset form
+      formRef.current.reset();
     } catch (error) {
-      console.error('Error sending email:', error);
+      console.error('Error submitting form:', error);
+
+      // Show error toast
+      toast({
+        variant: 'destructive',
+        title: 'Error!',
+        description: error instanceof Error ? error.message : 'An error occurred while submitting your message.',
+      });
+    } finally {
+      setIsSubmitting(false);
     }
-    setIsSubmitting(false);
   };
 
   return (
