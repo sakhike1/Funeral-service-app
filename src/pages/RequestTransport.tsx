@@ -4,7 +4,7 @@ const RequestTransport = () => {
 
   
   return (
-    <div>
+    <div >
       <HeroSeven/>
       
     </div>

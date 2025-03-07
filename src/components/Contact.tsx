@@ -1,7 +1,8 @@
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Send, Mail, Phone, MapPin } from 'lucide-react';
-import Image from '../assets/images/istockphoto-1347838937-612x612.jpg';
+import Image1 from '../assets/images/istockphoto-1347838937-612x612.jpg';
+import Image2 from '../assets/images/istockphoto-1481648899-612x612.jpg'; // Second image
 import { collection, addDoc } from 'firebase/firestore';
 import { db } from '../firebase'; // Ensure Firebase is properly initialized
 import { useToast } from '../hooks/use-toast'; // Import the toast hook
@@ -12,28 +13,93 @@ function App() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const { toast } = useToast(); // Initialize the toast hook
 
+  // State for error messages
+  const [errors, setErrors] = useState<{ [key: string]: string }>({
+    name: '',
+    email: '',
+    phone: '',
+    message: '',
+  });
+
+  // State for the current image
+  const [currentImage, setCurrentImage] = useState(Image1);
+
+  // Array of images to rotate
+  const images = [Image1, Image2];
+
+  // Function to change the image every 10 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImage((prevImage) => {
+        const currentIndex = images.indexOf(prevImage);
+        const nextIndex = (currentIndex + 1) % images.length;
+        return images[nextIndex];
+      });
+    }, 10000); // Change image every 10 seconds
+
+    return () => clearInterval(interval); // Cleanup interval on unmount
+  }, [images]);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formRef.current) return;
 
     setIsSubmitting(true);
 
+    // Reset errors
+    setErrors({
+      name: '',
+      email: '',
+      phone: '',
+      message: '',
+    });
+
     try {
       // Get form data
       const formData = new FormData(formRef.current);
       const name = formData.get('user_name') as string;
       const email = formData.get('user_email') as string;
+      const phone = formData.get('user_phone') as string;
       const message = formData.get('message') as string;
 
-      // Validate form fields
-      if (!name || !email || !message) {
-        throw new Error('Please fill in all fields.');
+      // Collect validation errors
+      const newErrors: { [key: string]: string } = {};
+
+      // Validate name
+      if (!name) {
+        newErrors.name = 'Name is required.';
+      }
+
+      // Validate email
+      if (!email) {
+        newErrors.email = 'Email is required.';
+      } else if (!/\S+@\S+\.\S+/.test(email)) {
+        newErrors.email = 'Please enter a valid email address.';
+      }
+
+      // Validate phone number (only digits allowed)
+      if (!phone) {
+        newErrors.phone = 'Phone number is required.';
+      } else if (!/^\d+$/.test(phone)) {
+        newErrors.phone = 'Phone number must contain only digits.';
+      }
+
+      // Validate message
+      if (!message) {
+        newErrors.message = 'Message is required.';
+      }
+
+      // If there are validation errors, set them and stop submission
+      if (Object.keys(newErrors).length > 0) {
+        setErrors(newErrors);
+        throw new Error('Please fix the errors below.');
       }
 
       // Prepare submission data
       const submissionData = {
         name,
         email,
+        phone,
         message,
         timestamp: new Date(),
       };
@@ -78,10 +144,13 @@ function App() {
             transition={{ duration: 0.8 }}
             className="space-y-8"
           >
-            <img
-              src={Image}
+            <motion.img
+              src={currentImage} // Use the current image state
               alt="Contact"
-              className="rounded-2xl shadow-2xl"
+              className="rounded-2xl shadow-2xl w-full h-auto"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5 }}
             />
             
             <div className="space-y-4">
@@ -143,6 +212,9 @@ function App() {
                     required
                     className="w-full px-4 py-2 rounded-lg bg-gray-800/50 border border-gray-700 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition"
                   />
+                  {errors.name && (
+                    <p className="text-red-400 text-sm">{errors.name}</p>
+                  )}
                 </motion.div>
                 
                 <motion.div
@@ -156,6 +228,25 @@ function App() {
                     required
                     className="w-full px-4 py-2 rounded-lg bg-gray-800/50 border border-gray-700 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition"
                   />
+                  {errors.email && (
+                    <p className="text-red-400 text-sm">{errors.email}</p>
+                  )}
+                </motion.div>
+                
+                <motion.div
+                  whileHover={{ scale: 1.02 }}
+                  className="space-y-2"
+                >
+                  <label className="block text-sm font-medium">Phone Number</label>
+                  <input
+                    type="text"
+                    name="user_phone"
+                    required
+                    className="w-full px-4 py-2 rounded-lg bg-gray-800/50 border border-gray-700 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition"
+                  />
+                  {errors.phone && (
+                    <p className="text-red-400 text-sm">{errors.phone}</p>
+                  )}
                 </motion.div>
                 
                 <motion.div
@@ -169,6 +260,9 @@ function App() {
                     rows={4}
                     className="w-full px-4 py-2 rounded-lg bg-gray-800/50 border border-gray-700 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition"
                   ></textarea>
+                  {errors.message && (
+                    <p className="text-red-400 text-sm">{errors.message}</p>
+                  )}
                 </motion.div>
                 
                 <motion.button

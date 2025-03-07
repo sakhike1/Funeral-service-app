@@ -30,7 +30,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ Icon, title, description, del
           isActive ? 'opacity-100' : 'opacity-0'
         }`}
       >
-        <div className="absolute inset-0 bg-gradient-to-br from-purple-900/40 via-blue-800/30 to-stone-900/40 animate-gradient" />
+        <div className="absolute inset-0 bg-gradient-to-r from-gray-700 via-gray-900 to-black animate-gradient" />
         <div className="absolute inset-0 bg-gradient-to-tr from-stone-900/80 via-purple-800/20 to-stone-900/80" />
       </div>
       <div className="relative p-8 h-full backdrop-blur-sm">

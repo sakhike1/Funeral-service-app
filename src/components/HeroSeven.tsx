@@ -171,10 +171,10 @@ const GoldTearsSendOff = () => {
   );
 
   return (
-    <div className="min-h-screen  p-3 sm:p-6 text-gray-100">
-      <div className="max-w-7xl mx-auto">
+    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-600   p-3 sm:p-6 text-gray-100">
+      <div className="max-w-7xl mt-20 mx-auto">
         <div className={`rounded-lg overflow-hidden ${gradients[backgroundIndex]} transition-colors duration-1000`}>
-          <div className="p-4 sm:p-8">
+          <div className="p-4  sm:p-8">
             <div className="text-center mb-6 sm:mb-8">
               <div>
                 <Heart className="w-12 h-12 sm:w-16 sm:h-16 mx-auto text-rose-400 mb-4" />
@@ -229,7 +229,7 @@ const GoldTearsSendOff = () => {
                     <div className="flex items-center justify-between mt-auto">
                       <span className="text-xs sm:text-sm text-gray-300">{step.details}</span>
                       <button 
-                        className="px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-rose-500 hover:bg-rose-600 text-white flex items-center gap-1 sm:gap-2 text-xs sm:text-sm transition-colors duration-300"
+                        className="px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-gradient-to-r from-indigo-300 to-purple-400 hover:bg-rose-600 text-white flex items-center gap-1 sm:gap-2 text-xs sm:text-sm transition-colors duration-300"
                       >
                         {step.action}
                         <ChevronRight className="w-3 h-3 sm:w-4 sm:h-4" />
@@ -309,7 +309,7 @@ const GoldTearsSendOff = () => {
                     </div>
                     {submitStatus.type && (
                       <div className={`p-3 rounded-lg ${
-                        submitStatus.type === 'success' ? 'bg-green-600/20 text-green-400' : 'bg-red-600/20 text-red-400'
+                        submitStatus.type === 'success' ? 'bg-green-600/20 text-green-400' : 'bg-gradient-to-r from-red-400 via-gray-300 to-blue-500 text-white'
                       }`}>
                         {submitStatus.message}
                       </div>
@@ -317,7 +317,7 @@ const GoldTearsSendOff = () => {
                     <button 
                       type="submit"
                       disabled={isSubmitting}
-                      className={`w-full p-2 sm:p-3 bg-rose-500 hover:bg-rose-600 rounded-lg text-white transition-colors duration-300 text-sm sm:text-base ${
+                      className={`w-full p-2 sm:p-3 bg-gradient-to-r from-yellow-200 via-pink-200 to-pink-400 hover:bg-rose-600 rounded-lg text-black transition-colors duration-300 text-sm sm:text-base ${
                         isSubmitting ? 'opacity-50 cursor-not-allowed' : ''
                       }`}
                     >

@@ -7,6 +7,7 @@ import About from './pages/About';
 import PlanAhead from './pages/PlanAhead';
 import Contact from './pages/Contact';
 import RequestTransport from './pages/RequestTransport';
+import ScrollButton from "./components/ScrollButton";
 import Footer from './components/FooterSection';
 
 const App = () => {
@@ -33,6 +34,7 @@ const App = () => {
             />
           </Routes>
         </div>
+        <ScrollButton/>
         <Footer />
       </div>
     </Router>
